@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input::file-selector-button {
+  background-color: #1a3a67 !important;
+}
+
+input::file-selector-button:hover {
+  background-color: #295d91 !important;
+}
