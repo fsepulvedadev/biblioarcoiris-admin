@@ -12,13 +12,13 @@ const BibliotecaProvider = ({ children }) => {
   }, []);
 
   const traerTotalArchivos = async () => {
-    fetch("http://localhost:3000/archivos?total=true")
+    fetch("https://arcoiris-api.vercel.app/archivos?total=true")
       .then((res) => res.json())
       .then((data) => setTotalArchivosDB(data.total));
   };
 
   const handleBusqueda = (busqueda, categorias) => {
-    let url = `http://localhost:3000/buscar?name=${busqueda}`;
+    let url = `https://arcoiris-api.vercel.app/buscar?name=${busqueda}`;
     if (busqueda === "") {
       /* url = `http://localhost:3000/buscar?name=`; */
       setArchivos([]);
@@ -39,7 +39,7 @@ const BibliotecaProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
   const handleDownload = (file) => {
-    fetch(`http://localhost:3000/descargar/${file}`)
+    fetch(`https://arcoiris-api.vercel.app/descargar/${file}`)
       .then((res) => res.blob())
       .then((blob) => {
         const a = document.createElement("a");
@@ -58,16 +58,19 @@ const BibliotecaProvider = ({ children }) => {
   const traerArchivos = async () => {
     setPrimeraBusqueda(false);
     setCargando(true);
-    const response = await fetch("http://localhost:3000/archivos");
+    const response = await fetch("https://arcoiris-api.vercel.app/archivos");
     const json = await response.json();
 
     setArchivos(json);
   };
 
   const borrarArchivo = async (id) => {
-    const response = await fetch(`http://localhost:3000/borrar?id=${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://arcoiris-api.vercel.app/borrar?id=${id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     traerArchivos();
 

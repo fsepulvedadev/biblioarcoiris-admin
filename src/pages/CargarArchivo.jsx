@@ -1913,7 +1913,7 @@ const CargarArchivo = () => {
             <Button
               /*   disabled={enviando ? true : false} */
               onClick={(e) => handleSubmit(e)}
-              className="w-1/2 flex items-center justify-center text-[0.80rem] bg-biblio hover:bg-biblio-200"
+              className="w-1/2 flex items-center justify-center text-[0.80rem] bg-biblio-500 hover:bg-biblio-200"
             >
               Cargar
               <MdUploadFile className="text-[1.3rem] ml-2" />
