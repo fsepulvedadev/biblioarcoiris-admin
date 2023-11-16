@@ -307,7 +307,7 @@ const CargarArchivo = () => {
       formDataObj.append("resumen", JSON.stringify(formData.resumen));
     }
 
-    fetch("http://localhost:3000/upload", {
+    fetch("http://localhost:4000/upload", {
       method: "POST",
       body: formDataObj,
     })
@@ -380,7 +380,7 @@ const CargarArchivo = () => {
   };
 
   return (
-    <div className="w-[83.5vw] min-h-screen ml-auto bg-blue-gray-100 flex justify-center items-start">
+    <div className=" min-h-screen ml-auto bg-blue-gray-100 flex justify-center items-start">
       {respuesta ? (
         respuesta.status === "success" ? (
           <Chip
@@ -1187,7 +1187,7 @@ const CargarArchivo = () => {
                   setFormData({
                     ...formData,
                     terminoDeMateriaControlado: {
-                      terminoDeMateriaControlado: e.target.value.toUpperCase(),
+                      terminoControlado: e.target.value.toUpperCase(),
                     },
                   });
                 }}
@@ -1398,11 +1398,9 @@ const CargarArchivo = () => {
                                     i
                                   );
                                 }}
-                                value={
-                                  adicionales.terminoDeMateriaPropuesto[index][
-                                    i
-                                  ].value
-                                }
+                                value={adicionales.terminoDeMateriaPropuesto[
+                                  index
+                                ][i].value.toUpperCase()}
                                 type={item.tipo}
                                 label={item.label}
                                 className=""
@@ -1481,11 +1479,9 @@ const CargarArchivo = () => {
                                     i
                                   );
                                 }}
-                                value={
-                                  adicionales.terminoDeMateriaNombreDePersona[
-                                    index
-                                  ][i].value
-                                }
+                                value={adicionales.terminoDeMateriaNombreDePersona[
+                                  index
+                                ][i].value.toUpperCase()}
                                 type={item.tipo}
                                 label={item.label}
                                 className=""

@@ -1,14 +1,16 @@
 import { IconButton, Typography, Chip } from "@material-tailwind/react";
 import { useState, useContext, useEffect } from "react";
-import { FaTrashAlt } from "react-icons/fa";
-import { MdFileDownload } from "react-icons/md";
+import { MdFileDownload, MdDeleteForever } from "react-icons/md";
 import BarraDeBusqueda from "../components/BarraDeBusqueda";
 import { Context } from "../context/context";
 import LoaderArcoiris from "../components/LoaderArcoiris";
 import date from "date-and-time";
+import { useNavigate } from "react-router-dom";
 
 const Lista = () => {
   const [respuesta, setRespuesta] = useState("");
+
+  const navigate = useNavigate();
 
   const {
     borrarArchivo,
@@ -18,6 +20,7 @@ const Lista = () => {
     setPrimeraBusqueda,
     primeraBusqueda,
     handleDownload,
+    traerUnArchivo,
   } = useContext(Context);
 
   useEffect(() => {
@@ -26,7 +29,6 @@ const Lista = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    console.log(id);
     const res = await borrarArchivo(id);
 
     setRespuesta(res);
@@ -35,8 +37,13 @@ const Lista = () => {
     }, 2500);
   };
 
+  const handleDetalles = async (id) => {
+    await traerUnArchivo(id);
+    navigate(`/archivo`);
+  };
+
   return (
-    <div className="w-[83.5vw] min-h-screen ml-auto bg-blue-gray-100 pb-10  flex flex-col justify-start items-center">
+    <div className=" min-h-screen ml-auto bg-blue-gray-100 pb-10  flex flex-col justify-start items-center">
       {/*  {respuesta ? (
         respuesta.status === "success" ? (
           <Chip
@@ -72,24 +79,24 @@ const Lista = () => {
                 ) : (
                   <table className="min-w-full mt-5">
                     <thead className="bg-white border-b ">
-                      <tr className="bg-blue-500 text-center">
+                      <tr className="bg-biblio-500 text-center">
                         <th
                           scope="col"
                           className="text-sm font-medium text-white px-6 py-4"
                         >
-                          Descripcion
+                          Fecha y hora
                         </th>
                         <th
                           scope="col"
                           className="text-sm font-medium text-white px-6 py-4"
                         >
-                          Nombre
+                          Nombre del archivo
                         </th>
                         <th
                           scope="col"
                           className="text-sm font-medium text-white px-6 py-4"
                         >
-                          File
+                          Titulo
                         </th>
                         <th
                           scope="col"
@@ -101,12 +108,8 @@ const Lista = () => {
                           scope="col"
                           className="text-sm font-medium text-white px-6 py-4"
                         >
-                          Categorias
+                          Eliminar / Descargar
                         </th>
-                        <th
-                          scope="col"
-                          className="text-sm font-medium text-white px-6 py-4"
-                        ></th>
                       </tr>
                     </thead>
                     <tbody className="text-center">
@@ -114,7 +117,8 @@ const Lista = () => {
                         <tr
                           key={i}
                           id={archivo._id}
-                          className="bg-gray-100 border-b"
+                          className="bg-gray-100 border-b cursor-pointer hover:bg-gray-300"
+                          onClick={(e) => handleDetalles(archivo._id)}
                         >
                           {" "}
                           <td className="text-sm text-gray-900 font-light px-6 py-4 ">
@@ -127,16 +131,9 @@ const Lista = () => {
                           <td className="px-6 py-4  overflow-hidden text-sm font-medium text-gray-900">
                             {archivo.titulo.titulo}
                           </td>
-                          {/*   
-                         
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             {archivo.ubicacion}
                           </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {archivo.categoria.map((cat, i) => (
-                              <p key={i}>{cat}</p>
-                            ))}
-                          </td> */}
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             <IconButton
                               onClick={() => {
@@ -150,7 +147,7 @@ const Lista = () => {
                               }}
                               color="red"
                             >
-                              <FaTrashAlt className="text-white" />
+                              <MdDeleteForever className="text-white text-xl" />
                             </IconButton>
                             <IconButton
                               color="amber"
@@ -159,7 +156,7 @@ const Lista = () => {
                                 handleDownload(archivo.archivo);
                               }}
                             >
-                              <MdFileDownload className="text-white text-lg" />
+                              <MdFileDownload className="text-white text-xl" />
                             </IconButton>
                           </td>
                         </tr>

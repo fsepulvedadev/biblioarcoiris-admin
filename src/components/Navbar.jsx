@@ -14,11 +14,11 @@ const Navbar = () => {
 
   return (
     <div className="flex items-center bg-biblio-500 text-white">
-      <h1 className="w-[15vw] flex justify-center items-center text-center fixed text-xl h-full bg-biblio-500">
-        <img src={logo} alt="logo" className="w-9/12" />
-      </h1>
-
-      <div className="flex items-center py-2 px-6 justify-between w-[83.5vw] bg-biblio-500 border-l-2 border-biblio ml-auto">
+      {/* <h1 className="w-[15vw] flex justify-center items-center text-center text-xl bg-biblio-500">
+        <img src={logo} alt="logo" className="w-8/12" />
+      </h1> */}
+      <img src={logo} alt="logo" className="h-20 ml-2" />
+      <div className="flex items-center py-2 px-6 justify-between  bg-biblio-500 border-l-2 border-biblio ml-auto">
         <div className="flex items-center "></div>
 
         <div className="flex items-center">

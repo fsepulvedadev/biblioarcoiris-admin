@@ -8,7 +8,7 @@ const Inicio = () => {
   const { totalArchivosDB } = useContext(Context);
 
   return (
-    <div className="w-[83.5vw] ml-auto bg-blue-gray-100 h-screen flex flex-col justify-start items-center">
+    <div className=" ml-auto bg-blue-gray-100 h-screen flex flex-col justify-start items-center">
       <div className="w-10/12">
         <div className="bg-white rounded-xl mt-10 p-4 w-10/12 mx-auto">
           <Typography className="text-xl text-center " variant="h1">
@@ -79,7 +79,7 @@ const Inicio = () => {
             </div>
           </div>
           <div className="bg-white col-span-12 grid rounded-xl place-items-center px-2">
-            <img src={banner} alt="" srcset="" />
+            <img className="w-10/12" src={banner} alt="" srcset="" />
           </div>
         </div>
       </div>
